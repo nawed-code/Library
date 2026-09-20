@@ -34,6 +34,24 @@ class Loan:
         self.__user = user
         self.__book = book
 
+    """ getters """
+
+    def get_user(self):
+        """ return the user"""
+        return self.__user
+    
+    def get_book(self):
+        """ return the book """
+        return self.__book
+    
+    def get_borrowed_date(self):
+        """ return the borrowing date """
+        return self.__borrowingDate
+    
+    def get_return_date(self):
+        """ return the date of return """
+        return self.__returnDate
+
     def is_late(self) -> bool :
         """
         Check whether the loan is overdue.
@@ -51,4 +69,8 @@ class Loan:
         Returns:
             int: The number of days since the book was borrowed.
         """
-        return (datetime.now() - self.__borrowingDate).days()
+        return (datetime.now() - self.__borrowingDate).days
+    
+
+    def __str__(self) -> str:
+        return f"{self.__user} borrowed {self.__book}"
