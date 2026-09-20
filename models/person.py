@@ -17,9 +17,9 @@ class Person:
             email (str): Person's email address.
         """
         self.__id = id
-        self.__lastName = nom
-        self.__name = prenom
-        self.__email = email
+        self.set_last_name(nom)
+        self.set_name(prenom)
+        self.set_email(email) 
 
     def get_name(self):
         """ give the first name """
@@ -39,19 +39,19 @@ class Person:
 
     def set_email(self,new_email :str):
         """ set a new adress email """    
-        if "@" not in new_email :
+        if "@" not in new_email or "." not in new_email :
             raise ValueError("Invalid email address")
         self.__email = new_email
 
     def set_name(self, new_name: str):
         """ set a new name """
-        if new_name =="" :
+        if not new_name.strip():
             raise ValueError("Invalid name")
         self.__name = new_name
 
     def set_last_name(self,new_last_name : str):
         """ set a new last name """
-        if new_last_name == "":
+        if not new_last_name.strip():
             raise ValueError("Invalid last name")
         self.__lastName = new_last_name    
 
