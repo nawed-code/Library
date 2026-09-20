@@ -17,17 +17,17 @@ class Person:
             email (str): Person's email address.
         """
         self.__id = id
-        self.__nom = nom
-        self.__prenom = prenom
+        self.__lastName = nom
+        self.__name = prenom
         self.__email = email
 
     def get_name(self):
         """ give the first name """
-        return self.__prenom
+        return self.__name
 
     def get_last_name(self):
         """ give the last name """
-        return self.__nom
+        return self.__lastName
     
     def get_id(self):
         """ give the id """
@@ -47,13 +47,13 @@ class Person:
         """ set a new name """
         if new_name =="" :
             raise ValueError("Invalid name")
-        self.__prenom = new_name
+        self.__name = new_name
 
     def set_last_name(self,new_last_name : str):
         """ set a new last name """
         if new_last_name == "":
             raise ValueError("Invalid last name")
-        self.__prenom = new_last_name    
+        self.__lastName = new_last_name    
 
         
     def get_information(self):
@@ -63,11 +63,11 @@ class Person:
         print(f"""
         {{
             id : {self.__id},
-            nom : {self.__nom},
-            prénom : {self.__prenom},
+            nom : {self.__lastName},
+            prénom : {self.__name},
             email address : {self.__email}
         }}
         """)
 
     def __str__(self):
-        return f'{self.__prenom} {self.__nom}'
+        return f'{self.__name} {self.__lastName}'
