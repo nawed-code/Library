@@ -46,8 +46,11 @@ class Library:
             bool: True if the book was successfully removed,
             False otherwise.
         """
-        if self.find_book(book_id) :
-
+        book = self.find_book(book_id)
+        if book is None:
+            return False
+        self.__books.remove(book)
+        return True
 
     def update_book(
         self,
