@@ -1,6 +1,7 @@
 from user import User
 from book import Book
 from loan import Loan
+from datetime import datetime,timedelta
 
 class Library:
     """
@@ -76,7 +77,6 @@ class Library:
         """
         book = self.find_book(book_id)
         if book is None :
-            print("Ce livre n'existe pas dans la bibliothèque !")
             return False
         book.set_title(title)
         book.set_author(author)
@@ -115,12 +115,9 @@ class Library:
             False otherwise.
         """
         if self.find_user(user.get_id()) is not None :
-            print("L'utilisateur existe ! ")
             return False
         self.__users.append(user)
         return True 
-        
-
 
     def find_user(self, user_id: int) -> User | None:
         """
@@ -141,29 +138,38 @@ class Library:
     def list_users(self) -> list[User]:
         """
         Return all registered users.
-
         Returns:
             list[User]: A list containing all users.
         """
-        pass
+        return self.__users
 
     def borrow_book(self, user_id: int, book_id: int) -> bool:
         """
         Allow a user to borrow a book.
-
         The method verifies that the user and the book
         exist and that the book is available before
         creating a new loan.
-
         Args:
             user_id (int): The unique identifier of the user.
             book_id (int): The unique identifier of the book.
-
         Returns:
             bool: True if the borrowing operation was successful,
             False otherwise.
         """
-        pass
+        book = self.find_book(book_id)
+        if book is None:
+            return False
+        user = self.find_user(user_id)
+        if user is None:
+            return False
+        if book.is_available():
+            book.change_availability()
+            loan = Loan(datetime.now(),return_date =None ,user=user, book=book)
+            self.__loans.append(loan)
+            user.emprunter(book)
+            return True
+        return False
+
 
     def return_book(self, user_id: int, book_id: int) -> bool:
         """
