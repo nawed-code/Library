@@ -103,7 +103,7 @@ class Library:
         Returns:
             list[Book]: A list containing all books.
         """
-        return
+        return self.__books
 
     def add_user(self, user: User) -> bool:
         """
