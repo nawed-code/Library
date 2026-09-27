@@ -114,6 +114,11 @@ class Library:
             bool: True if the user was successfully added,
             False otherwise.
         """
+        if self.find_user(user.get_id()) is not None :
+            print("L'utilisateur existe ! ")
+            return False
+        self.__users.append(user)
+        return True 
         
 
 
