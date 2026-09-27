@@ -30,12 +30,11 @@ class Library:
             bool: True if the book was successfully added,
             False otherwise.
         """
-        first_long = len(self.__books)
+        if self.find_book(book.get_id()) is not None :   # si book existe on ne l'ajoute pas 
+            return False
+        
         self.__books.append(book)
-        second_long = len(self.__books)
-        if first_long +1 == second_long :
-            return True
-        return False
+        return True
 
 
     def remove_book(self, book_id: int) -> bool:
@@ -47,7 +46,8 @@ class Library:
             bool: True if the book was successfully removed,
             False otherwise.
         """
-        
+        if self.find_book(book_id) :
+
 
     def update_book(
         self,
@@ -82,7 +82,10 @@ class Library:
             Book | None: The matching book if found,
             otherwise None.
         """
-        pass
+        for b in self.__books:
+            if b.get_id() == book_id  :
+                return b
+        return None
 
     def list_books(self) -> list[Book]:
         """
