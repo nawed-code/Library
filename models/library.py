@@ -74,7 +74,14 @@ class Library:
             bool: True if the book was successfully updated,
             False otherwise.
         """
-        pass
+        book = self.find_book(book_id)
+        if book is None :
+            return False
+        book.set_title(title)
+        book.set_author(author)
+        book.set_category(category)
+        book.set_year(year)
+        return True
 
     def find_book(self, book_id: int) -> Book | None:
         """
@@ -93,11 +100,10 @@ class Library:
     def list_books(self) -> list[Book]:
         """
         Return all books in the library.
-
         Returns:
             list[Book]: A list containing all books.
         """
-        pass
+        return
 
     def add_user(self, user: User) -> bool:
         """
