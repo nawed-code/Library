@@ -76,6 +76,7 @@ class Library:
         """
         book = self.find_book(book_id)
         if book is None :
+            print("Ce livre n'existe pas dans la bibliothèque !")
             return False
         book.set_title(title)
         book.set_author(author)
@@ -108,15 +109,13 @@ class Library:
     def add_user(self, user: User) -> bool:
         """
         Add a new user to the library.
-
-        Args:
-            user (User): The user to add.
-
+        Args:user (User): The user to add.
         Returns:
             bool: True if the user was successfully added,
             False otherwise.
         """
-        pass
+        
+
 
     def find_user(self, user_id: int) -> User | None:
         """
@@ -129,7 +128,10 @@ class Library:
             User | None: The matching user if found,
             otherwise None.
         """
-        pass
+        for user in self.__users:
+            if user.get_id() == user_id :
+                return user
+        return None
 
     def list_users(self) -> list[User]:
         """
