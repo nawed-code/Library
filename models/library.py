@@ -174,19 +174,29 @@ class Library:
     def return_book(self, user_id: int, book_id: int) -> bool:
         """
         Process the return of a borrowed book.
-
         Updates the book's availability and closes
         the corresponding loan.
-
         Args:
             user_id (int): The unique identifier of the user.
             book_id (int): The unique identifier of the book.
-
         Returns:
             bool: True if the return operation was successful,
             False otherwise.
         """
-        pass
+        user = self.find_user(user_id)
+        if user is None :   
+            return False
+        book = self.find_book(book_id)
+        if book is None :
+            return False
+        for loan in self.__loans:
+            if loan.get_user().get_id() == user_id and loan.get_book().get_id()==book_id:
+                loan.return_book()
+                book.change_availability()
+                user.retourner(book)
+                return True
+        return False
+        
 
     def list_loans(self) -> list[Loan]:
         """
