@@ -201,25 +201,21 @@ class Library:
     def list_loans(self) -> list[Loan]:
         """
         Return all recorded loans.
-
         Returns:
             list[Loan]: A list containing all loans.
         """
-        pass
+        return self.__loans
 
     def save(self):
         """
         Save the library data.
-
         Stores books, users, and loans in persistent
         storage (e.g., JSON files).
         """
         pass
-
     def load(self):
         """
         Load the library data.
-
         Restores books, users, and loans from
         persistent storage.
         """
