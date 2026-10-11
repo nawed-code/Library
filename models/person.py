@@ -9,7 +9,6 @@ class Person:
     def __init__(self, id: int, nom: str, prenom: str, email: str):
         """
         Initialize a new person.
-
         Args:
             id (int): Unique identifier of the person.
             nom (str): Person's last name.
@@ -68,6 +67,20 @@ class Person:
             email address : {self.__email}
         }}
         """)
+
+    def to_dict(self) -> dict:
+        """
+        Convert the person into a dictionary.
+        Returns:
+        dict: A dictionary containing the person's information.
+        """
+        return {
+            "id":self.get_id(),
+            "last_name":self.get_last_name(),
+            "name":self.get_name(),
+            "email":self.get_email()
+        }
+
 
     def __str__(self):
         return f'{self.__name} {self.__lastName}'

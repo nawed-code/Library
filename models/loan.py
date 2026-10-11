@@ -82,6 +82,19 @@ class Loan:
         """Mark the loan as returned."""
         self.__returnDate = datetime.now()
 
+    def to_dict(self) -> dict:
+        """
+        Convert the loan into a dictionary.
+        Returns:
+        dict: A dictionary containing the loan information,
+        including the borrowing date, return date, user, and book.
+        """
+        return{
+            "borrowing_date": self.__borrowingDate.isoformat(),
+            "return_date":(self.__returnDate.isoformat() if self.__returnDate is not None else None),
+            "user": self.__user.get_id(),
+            "book": self.__book.get_id()
+        }
 
     def __str__(self) -> str:
         return f"{self.__user} borrowed {self.__book}"

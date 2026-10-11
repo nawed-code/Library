@@ -104,5 +104,21 @@ class Book:
         """
         return self.__available
     
+    def to_dict(self) -> dict:
+        """ Convert the book into a dictionary.
+            Returns:
+            dict: A dictionary containing all the book's information.
+        """
+        
+        return {
+        "id": self.__id,
+        "title": self.__title,
+        "author": self.__author,
+        "category": self.__category,
+        "year": self.__year,
+        "available": self.__available
+    }
+
+    
     def __str__(self) -> str:
         return f"{self.__title} {self.__year}" 

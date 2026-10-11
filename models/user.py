@@ -1,16 +1,55 @@
 from person import Person
 
 
-
 class User(Person):
-    def __init__(self,id,nom,prenom,email ):
-        Person.__init__(self,id, nom, prenom, email)
+    """
+    Represents a library user.
+
+    A user can borrow, view, and return books.
+    The user also maintains a list of currently borrowed books.
+    """
+
+    def __init__(self, id, nom, prenom, email):
+        """
+        Initialize a new library user.
+
+        Args:
+            id (int): Unique identifier of the user.
+            nom (str): User's last name.
+            prenom (str): User's first name.
+            email (str): User's email address.
+        """
+        super().__init__(id, nom, prenom, email)
         self.__borrowed_book = []
-    
-    def emprunter(self):
+
+    def emprunter(self, book):
+        """
+        Borrow a book if it is available.
+        Args:
+            book (Book): The book to borrow.
+        Returns:
+            bool: True if the book was successfully borrowed,
+            False otherwise.
+        """
+        self.__borrowed_book.append(book)
+        
+
+    def retourner(self, book):
+        """
+        Return a previously borrowed book.
+        Args:
+            book (Book): The book to return.
+        Returns:
+            bool: True if the book was successfully returned,
+            False otherwise.
+        """
         pass
 
-    def retourner(self):
+    def to_dict(self) -> dict:
+        """
+        Convert the user into a dictionary.
+        Returns:
+        dict: A dictionary containing the user's information,
+        including the borrowed books.
+        """
         pass
-
-
