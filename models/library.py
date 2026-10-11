@@ -2,6 +2,7 @@ from user import User
 from book import Book
 from loan import Loan
 from datetime import datetime,timedelta
+import json
 
 class Library:
     """
@@ -212,7 +213,22 @@ class Library:
         Stores books, users, and loans in persistent
         storage (e.g., JSON files).
         """
-        pass
+        data={}
+
+        users =[u.to_dict() for u in self.__users]
+        data["users"]=users
+
+        books=[b.to_dict() for b in self.__books]
+        data["books"]=books
+
+        loans=[l.to_dict() for l in self.__loans]
+        data["loans"]=loans
+        
+
+        with open("../data/library.json","w",encoding="utf-8") as file:
+            json.dump(data,file,indent=4,ensure_ascii=False)
+        
+
     def load(self):
         """
         Load the library data.
