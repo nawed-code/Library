@@ -235,5 +235,34 @@ class Library:
         Restores books, users, and loans from
         persistent storage.
         """
-        pass
+        with open("../data/library.json","r",encoding='utf-8') as file:
+            data = json.load(file)
+            users = data["users"]
+            books = data["books"]
+            loans = data["loans"]
+
+            self.__users.clear()
+            self.__books.clear()
+            self.__loans.clear()
+
+            for u in users:
+                self.__users.append(User.from_dict(u))
+
+            for b in books:
+                self.__books.append(Book.from_dict(b))
+            
+            for l in loans:
+                borrowing_date = datetime.fromisoformat(l["borrowing_date"])
+
+                if l["return_date"] is None:
+                    return_date = None
+                else:
+                    return_date= datetime.fromisoformat(l["return_date"])
+
+                user = self.find_user(l["user_id"])
+                book = self.find_book(l["book_id"])
+                if user is None or book is None:
+                    continue
+                loan = Loan(borrowing_date,return_date,user,book)
+                self.__loans.append(loan)
     
