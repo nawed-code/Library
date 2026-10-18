@@ -9,6 +9,12 @@ class User(Person):
     The user also maintains a list of currently borrowed books.
     """
 
+    @classmethod
+    def from_dict(cls,data):
+        return cls(data["id"],data["last_name"],data["name"],data["email"])
+        
+    
+
     def __init__(self, id, nom, prenom, email):
         """
         Initialize a new library user.
@@ -52,4 +58,9 @@ class User(Person):
         dict: A dictionary containing the user's information,
         including the borrowed books.
         """
-        pass
+        return {
+            "id":self.get_id(),
+            "last_name":self.get_last_name(),
+            "name":self.get_name(),
+            "email":self.get_email()
+        }
