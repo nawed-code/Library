@@ -7,6 +7,10 @@ class Book:
     category, publication year, and availability status.
     """
 
+    @classmethod
+    def from_dict(cls,data):
+        return cls(data["id"],data["title"],data["author"],data["category"],data["year"],data["available"])
+
     def __init__(
         self,
         id: int,
