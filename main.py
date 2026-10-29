@@ -6,21 +6,11 @@ from models.librarian import Librarian
 
 import sys
 from PySide6.QtWidgets import QApplication, QWidget
+from views.main_window import MainWindow
 
 def main():
-    #partie PySide6 
-    app = QApplication(sys.argv)
-    window = QWidget()
-    window.setWindowTitle("Library Management")
-    window.resize(800,600)
-
-    window.show()
-    app.exec() #lance la boucle Qt (Tant que la fenêtre existe)
-    
-
-
-    # partie console 
     """
+    # partie console 
     library = Library()
 
     library.load()
@@ -67,6 +57,15 @@ def main():
 
     library.save()
     """
+    #partie PySide6 
+    app = QApplication(sys.argv)
+    library = Library()
+    window = MainWindow(library)
+    window.show()
+    app.exec() #lance la boucle Qt (Tant que la fenêtre existe)
+    
+
+    
 
 if __name__ == "__main__":
     main()
