@@ -4,13 +4,21 @@ from models.user import User
 from models.loan import Loan
 from models.librarian import Librarian
 
+import sys
+from PySide6.QtWidgets import QApplication, QWidget
+
 def main():
+    #partie PySide6 
+
+
+    # partie console 
+
     library = Library()
 
     library.load()
     print("après load : ")
     print("\nUsers:")
-    
+
     print("Books:")
     for book in library.list_books():
         book.show()
