@@ -23,5 +23,17 @@ class RemoveBookWindow(QWidget):
 
         self.setLayout(layout)
 
-    def remove_book(self):
-        pass
+    def remove_book(self):              # supprime un livre
+        try:
+            id = int(self.id_input.text())
+        except ValueError:
+            QMessageBox.warning(self,"Error","The id should be a number")
+            return
+        if self.library.remove_book(id):
+            self.library.save()
+            print("Book removed successfully")
+            self.close()
+            
+        else:
+            QMessageBox.warning(self,"Error","We could not find this book")
+            return
