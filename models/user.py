@@ -1,4 +1,4 @@
-from person import Person
+from .person import Person
 
 
 class User(Person):
@@ -11,6 +11,18 @@ class User(Person):
 
     @classmethod
     def from_dict(cls,data):
+        """
+            Create a User object from a dictionary.
+            Args:
+                data (dict): A dictionary containing the person's data.
+                    Expected keys are:
+                    - "id" (int): The person's unique identifier.
+                    - "last_name" (str): The person's last name.
+                    - "name" (str): The person's first name.
+                    - "email" (str): The person's email address.
+            Returns:
+                User: A new User instance initialized with the provided data.
+        """
         return cls(data["id"],data["last_name"],data["name"],data["email"])
         
     
