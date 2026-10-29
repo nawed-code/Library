@@ -1,8 +1,11 @@
-from user import User
-from book import Book
-from loan import Loan
+from .user import User
+from .book import Book
+from .loan import Loan
 from datetime import datetime,timedelta
 import json
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent.parent
+DATA_FILE = BASE_DIR / "data" / "library.json"
 
 class Library:
     """
@@ -225,7 +228,7 @@ class Library:
         data["loans"]=loans
         
 
-        with open("../data/library.json","w",encoding="utf-8") as file:
+        with open(DATA_FILE,"w",encoding="utf-8") as file:
             json.dump(data,file,indent=4,ensure_ascii=False)
         
 
@@ -235,7 +238,7 @@ class Library:
         Restores books, users, and loans from
         persistent storage.
         """
-        with open("../data/library.json","r",encoding='utf-8') as file:
+        with open(DATA_FILE,"r",encoding='utf-8') as file:
             data = json.load(file)
             users = data["users"]
             books = data["books"]
@@ -259,8 +262,8 @@ class Library:
                 else:
                     return_date= datetime.fromisoformat(l["return_date"])
 
-                user = self.find_user(l["user_id"])
-                book = self.find_book(l["book_id"])
+                user = self.find_user(l["user"])
+                book = self.find_book(l["book"])
                 if user is None or book is None:
                     continue
                 loan = Loan(borrowing_date,return_date,user,book)
