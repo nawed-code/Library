@@ -9,6 +9,20 @@ class Book:
 
     @classmethod
     def from_dict(cls,data):
+        """
+        Create a Book object from a dictionary.
+        Args:
+            data (dict): A dictionary containing the book's data.
+        Expected keys are:
+        - "id" (int): The book's unique identifier.
+        - "title" (str): The book's title.
+        - "author" (str): The book's author.
+        - "category" (str): The book's category.
+        - "year" (date): The book's year.
+        - "available" (bool): The book's availability.
+        Returns:
+        Book: A new Book instance initialized with the provided data.
+        """
         return cls(data["id"],data["title"],data["author"],data["category"],data["year"],data["available"])
 
     def __init__(
@@ -79,7 +93,7 @@ class Book:
 
     def set_year(self,new_year:int):
         """ set a new year for book """
-        currently_year = datetime.now().year()
+        currently_year = datetime.now().year
         if new_year < 1450 or new_year > currently_year:
             raise ValueError("Invalid publication year !")
         self.__year = new_year
