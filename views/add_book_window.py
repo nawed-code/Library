@@ -16,10 +16,10 @@ class AddBookWindow(QWidget):
         self.category_input = QLineEdit()
         self.year_input = QLineEdit()
 
-        title_label = QLabel("Title")
-        author_label = QLabel("Author")
-        category_label = QLabel("Category")
-        year_label = QLabel("Year")
+        title_label = QLabel("Title :")
+        author_label = QLabel("Author :")
+        category_label = QLabel("Category :")
+        year_label = QLabel("Year :")
 
         layout = QVBoxLayout()
         layout.addWidget(title_label)
@@ -56,4 +56,5 @@ class AddBookWindow(QWidget):
         
         self.library.add_book(book)
         self.library.save()
-        print("book added")
+        print("Book added successfully")
+        self.close()
