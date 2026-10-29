@@ -10,7 +10,6 @@ class Loan:
     It records the borrowing date and the return date once the
     book has been returned.
     """
-
     def __init__(
         self,
         borrowing_date: datetime,
