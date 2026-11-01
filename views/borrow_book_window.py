@@ -29,4 +29,16 @@ class BorrowBookWindow(QWidget):
         
 
     def borrow_book(self):
-        pass
+        try:
+            user_id = int(self.user_id_input.text())
+            book_id = int(self.book_id_input.text())
+        except ValueError:
+            QMessageBox.warning(self,"Error","The  id should be a number")
+            print("The id must be a number")
+            return
+        if self.library.borrow_book(user_id,book_id):
+            self.library.save()
+            print("Book borrowed successfully ")
+            self.close()
+        else:
+            QMessageBox.warning(self,"Error","Please check the id or availability of the book")
