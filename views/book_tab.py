@@ -14,30 +14,39 @@ class BookTab(QWidget):
         self.resize(800, 600)
         self.library = library
 
-        #   @@@@@@@@@@@@@@@@@@      buttons     @@@@@@@@@@@@@@@@@@@@@@
+        layoutH = QHBoxLayout()         # container 
+        
+        #   @@@@@@@@@@@@@@@@@@      searche bar     @@@@@@@@@@@@@@@@@@@@@@
+        searcheLabel = QLabel("Searche : ")
+        self.searcheInput = QLineEdit()
 
+        #   @@@@@@@@@@@@@@@@@@      buttons     @@@@@@@@@@@@@@@@@@@@@@
+        searcheButton = QPushButton("Searche",self)
         addButton = QPushButton("Add Book", self)
         deleteButton = QPushButton("Delete Book",self)
-        borrowButton = QPushButton("Borrow",self)
         updateButton = QPushButton("Update",self)
-        returnButton = QPushButton("Return",self)
 
-        #   @@@@@@@@@@@@@@@@@@      container     @@@@@@@@@@@@@@@@@@@@@@
-        layoutH = QHBoxLayout()
+        #   @@@@@@@@@@@@@@@@@@      elements du container     @@@@@@@@@@@@@@@@@@@@@@
+        layoutH.addWidget(searcheLabel)
+        layoutH.addWidget(self.searcheInput)
+        layoutH.addWidget(searcheButton)
+
         layoutH.addWidget(addButton)
         layoutH.addWidget(deleteButton)
-        layoutH.addWidget(borrowButton)
         layoutH.addWidget(updateButton)
-        layoutH.addWidget(returnButton)
         self.setLayout(layoutH)
 
         #   @@@@@@@@@@@@@@@@@@      fonctions      @@@@@@@@@@@@@@@@@@@@@@
+        searcheButton.clicked.connect(self.searche_book)
         addButton.clicked.connect(self.add_book)
         deleteButton.clicked.connect(self.remove_book)
         updateButton.clicked.connect(self.update_book)
 
         #           --------------  méthode pour les boutons -------------------
     
+    def searche_book(self):
+        pass
+
     def add_book(self):                                     #ajoute book
         self.add_book_window = AddBookWindow(self.library)
         self.add_book_window.show()
