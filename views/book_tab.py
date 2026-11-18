@@ -1,8 +1,9 @@
 
-from PySide6.QtWidgets import QWidget, QLineEdit,QVBoxLayout,QLabel,QPushButton,QMessageBox,QHBoxLayout,QTabWidget
+from PySide6.QtWidgets import QWidget, QLineEdit,QVBoxLayout,QLabel,QPushButton,QMessageBox,QHBoxLayout,QTableWidget,QTableWidgetItem
 from .book_management.add_book_window import AddBookWindow
 from .book_management.remove_book_window import RemoveBookWindow
 from .book_management.update_book_window import UpdateBookWindow
+from models.book import Book
 
 
 class BookTab(QWidget):
@@ -14,27 +15,50 @@ class BookTab(QWidget):
         self.resize(800, 600)
         self.library = library
 
-        layoutH = QHBoxLayout()         # container 
-        
+        layout_searche = QHBoxLayout()
+        layoutH = QHBoxLayout()          
+        layout_principale = QVBoxLayout()   # container
+
         #   @@@@@@@@@@@@@@@@@@      searche bar     @@@@@@@@@@@@@@@@@@@@@@
         searcheLabel = QLabel("Searche : ")
         self.searcheInput = QLineEdit()
+        searcheButton = QPushButton("Searche",self)
+
+        layout_searche.addWidget(searcheLabel)
+        layout_searche.addWidget(self.searcheInput)
+        layout_searche.addWidget(searcheButton)
 
         #   @@@@@@@@@@@@@@@@@@      buttons     @@@@@@@@@@@@@@@@@@@@@@
-        searcheButton = QPushButton("Searche",self)
         addButton = QPushButton("Add Book", self)
         deleteButton = QPushButton("Delete Book",self)
         updateButton = QPushButton("Update",self)
 
-        #   @@@@@@@@@@@@@@@@@@      elements du container     @@@@@@@@@@@@@@@@@@@@@@
-        layoutH.addWidget(searcheLabel)
-        layoutH.addWidget(self.searcheInput)
-        layoutH.addWidget(searcheButton)
+        #   @@@@@@@@@@@@@@@@@@      table     @@@@@@@@@@@@@@@@@@@@@@
+        self.table = QTableWidget()
+        self.table.setColumnCount(6)
+        self.table.setHorizontalHeaderLabels(["ID","Title","Author", "Category","Year","Available"])
+        self.list_book = self.library.list_books()
+        taille =len(self.list_book)
+        self.table.setRowCount(taille)
+        for i in range(taille):
+            self.table.setItem(i, 0, QTableWidgetItem(f"{self.list_book[i].get_id()}"))
+            self.table.setItem(i, 1, QTableWidgetItem(self.list_book[i].get_title()))
+            self.table.setItem(i, 2, QTableWidgetItem(self.list_book[i].get_author()))
+            self.table.setItem(i, 3, QTableWidgetItem(self.list_book[i].get_category()))
+            self.table.setItem(i, 4, QTableWidgetItem(f"{self.list_book[i].get_year()}"))
+            self.table.setItem(i, 5, QTableWidgetItem(f"{self.list_book[i].is_available()}"))
+        layout_principale.addWidget(self.table)   # ajoute la table 
+
+        #   @@@@@@@@@@@@@@@@@@       container     @@@@@@@@@@@@@@@@@@@@@@
 
         layoutH.addWidget(addButton)
         layoutH.addWidget(deleteButton)
         layoutH.addWidget(updateButton)
-        self.setLayout(layoutH)
+
+        layout_principale.addLayout(layout_searche)
+        layout_principale.addLayout(layoutH)
+
+        self.setLayout(layout_principale)
 
         #   @@@@@@@@@@@@@@@@@@      fonctions      @@@@@@@@@@@@@@@@@@@@@@
         searcheButton.clicked.connect(self.searche_book)
@@ -46,6 +70,7 @@ class BookTab(QWidget):
     
     def searche_book(self):
         pass
+        
 
     def add_book(self):                                     #ajoute book
         self.add_book_window = AddBookWindow(self.library)
